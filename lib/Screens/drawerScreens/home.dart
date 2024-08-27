@@ -35,7 +35,7 @@ class _AttandenceDetailsState extends State<AttandenceDetails> {
                 color: Colors.blueAccent,
               ),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             Container(
               decoration: BoxDecoration(
                 color: Colors.white,
@@ -45,7 +45,7 @@ class _AttandenceDetailsState extends State<AttandenceDetails> {
                     color: Colors.grey.withOpacity(0.3),
                     spreadRadius: 2,
                     blurRadius: 8,
-                    offset: Offset(0, 3),
+                    offset: const Offset(0, 3),
                   ),
                 ],
               ),
@@ -64,7 +64,7 @@ class _AttandenceDetailsState extends State<AttandenceDetails> {
                   _focusedDay = focusedDay;
                 },
                 calendarStyle: CalendarStyle(
-                  selectedDecoration: BoxDecoration(
+                  selectedDecoration: const BoxDecoration(
                     color: Colors.blueAccent,
                     shape: BoxShape.circle,
                   ),
@@ -72,7 +72,7 @@ class _AttandenceDetailsState extends State<AttandenceDetails> {
                     color: Colors.blue[100],
                     shape: BoxShape.circle,
                   ),
-                  defaultDecoration: BoxDecoration(
+                  defaultDecoration: const BoxDecoration(
                     shape: BoxShape.circle,
                   ),
                   outsideDecoration: BoxDecoration(
@@ -80,7 +80,7 @@ class _AttandenceDetailsState extends State<AttandenceDetails> {
                     shape: BoxShape.circle,
                   ),
                 ),
-                headerStyle: HeaderStyle(
+                headerStyle: const HeaderStyle(
                   titleTextStyle: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
@@ -94,10 +94,10 @@ class _AttandenceDetailsState extends State<AttandenceDetails> {
                 ),
               ),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             Text(
               'Selected Day: ${_selectedDay.toLocal()}',
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.w600,
                 color: Colors.black87,

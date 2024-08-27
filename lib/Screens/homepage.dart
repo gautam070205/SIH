@@ -1,22 +1,25 @@
 import 'dart:async';
 
 import 'package:attendance/Screens/drawerScreens/home.dart';
+import 'package:attendance/Screens/registerScreens/login.dart';
 import 'package:attendance/common/appstyle.dart';
 import 'package:attendance/constants.dart';
+import 'package:attendance/provider/userProvider.dart';
 // import 'package:attendance/route/route.gr.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
-class Homepage extends StatefulWidget {
+class Homepage extends ConsumerStatefulWidget {
   const Homepage({super.key});
 
   @override
-  State<Homepage> createState() => _HomepageState();
+  ConsumerState<Homepage> createState() => _HomepageState();
 }
 
-class _HomepageState extends State<Homepage> {
+class _HomepageState extends ConsumerState<Homepage> {
   bool isInsideGeofence = false;
   double? latitude = 0.0;
   double? longitude = 0.0;
@@ -36,7 +39,17 @@ class _HomepageState extends State<Homepage> {
   @override
   void initState() {
     super.initState();
-    _checkPermissionAndStartGeofencing();
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
+      // ref.read(authPageProvider.notifier).signUp(
+      //     "gautam", "medapp772@gmail.com", "1234qwer@G", "tedx", "1234qwer@G");
+      // ref
+      //     .read(authPageProvider.notifier)
+      //     .verifyPin("378760", "medapp772@gmail.com");
+      ref
+          .read(authPageProvider.notifier)
+          .signIn("medapp772@gmail.com", "1234qwer@G");
+      ref.read(authPageProvider.notifier).getUserInfo();
+    });
   }
 
   Future<void> _checkPermissionAndStartGeofencing() async {
@@ -219,8 +232,8 @@ class _HomepageState extends State<Homepage> {
 
   @override
   Widget build(BuildContext context) {
-    final String userName = "XYZ";
-    final String companyName = "Your Company Name";
+    final String userName = ref.read(authPageProvider).user.name;
+    final String companyName = ref.read(authPageProvider).user.companyName;
 
     return Scaffold(
       appBar: AppBar(
@@ -287,9 +300,12 @@ class _HomepageState extends State<Homepage> {
             ListTile(
               leading: const Icon(Icons.logout_outlined),
               title: const Text('Logout'),
-              onTap: () {
-                Navigator.of(context).pop(); // Close the drawer
-                // Add your logout code here
+              onTap: () async {
+                // Perform logout
+                await ref.read(authPageProvider.notifier).logout();
+
+                // Navigate to the login page using GetX
+                Get.to(() => LoginPage());
               },
             ),
           ],

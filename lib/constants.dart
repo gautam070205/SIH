@@ -20,7 +20,7 @@ const kOffWhite = Color(0xffF3F4F8);
 double height = 825.h;
 double width = 375.w;
 
-const String appBaseUrl = "http://172.16.79.90:6013";
+const String appBaseUrl = "http://172.16.132.176:5000/api";
 // //1.Open Command prompt
 // 2.Type ipconfig
 // 3 .Copy ip Address and paste it here
